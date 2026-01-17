@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+
+<html lang="pl">
+
+<head>
+
+<meta charset="UTF-8" />
+
+<title>Interaktywna mapa kariery</title>
+
+ 
+
+<style>
+
+:root {
+
+  --pink: rgb(226,0,122);
+
+  --gray: rgb(112,113,115);
+
+  --black: rgb(0,0,0);
+
+  --white: rgb(255,255,255);
+
+ 
+
+  --blue: rgb(39,46,116);
+
+  --green1: rgb(139,182,58);
+
+  --green2: rgb(182,201,47);
+
+  --yellow1: rgb(238,193,9);
+
+  --yellow2: rgb(245,211,0);
+
+}
+
+ 
+
+body {
+
+  margin: 0;
+
+  font-family: Arial, sans-serif;
+
+  background: #eee;
+
+}
+
+ 
+
+#career-map {
+
+  padding: 60px 20px;
+
+  background: linear-gradient(180deg, #ffffff, #f2f2f2);
+
+}
+
+ 
+
+.map-wrapper {
+
+  position: relative;
+
+  max-width: 1000px;
+
+  margin: 0 auto;
+
+}
+
+ 
+
+.career-map-svg {
+
+  width: 100%;
+
+  height: auto;
+
+}
+
+ 
+
+/* Bannery START / META */
+
+.banner rect {
+
+  fill: var(--pink);
+
+}
+
+ 
+
+.banner text {
+
+  fill: var(--white);
+
+  font-weight: bold;
+
+  text-anchor: middle;
+
+  font-size: 16px;
+
+}
+
+ 
+
+/* Punkty */
+
+.map-point {
+
+  cursor: pointer;
+
+  transition: transform 0.2s ease;
+
+}
+
+ 
+
+.map-point circle {
+
+  fill: var(--blue);
+
+}
+
+ 
+
+.map-point text {
+
+  fill: var(--white);
+
+  font-weight: bold;
+
+  text-anchor: middle;
+
+  font-size: 14px;
+
+}
+
+ 
+
+.map-point:hover {
+
+  transform: scale(1.15);
+
+}
+
+ 
+
+/* Popup */
+
+.popup {
+
+  position: absolute;
+
+  max-width: 260px;
+
+  background: var(--white);
+
+  border: 2px solid var(--pink);
+
+  border-radius: 12px;
+
+  padding: 16px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+
+  display: none;
+
+  z-index: 10;
+
+}
+
+ 
+
+.popup h3 {
+
+  margin-top: 0;
+
+  color: var(--pink);
+
+}
+
+</style>
+
+</head>
+
+ 
+
+<body>
+
+ 
+
+<section id="career-map">
+
+  <div class="map-wrapper">
+
+ 
+
+    <!-- SVG MAPA -->
+
+    <svg
+
+      viewBox="0 0 1000 600"
+
+      class="career-map-svg"
+
+      xmlns=http://www.w3.org/2000/svg
+
+    >
+
+ 
+
+      <!-- DROGA -->
+
+      <path
+
+        d="M100 500
+
+           C 300 450, 200 300, 400 280
+
+           S 600 200, 700 300
+
+           S 850 420, 900 100"
+
+        fill="none"
+
+        stroke="rgb(112,113,115)"
+
+        stroke-width="40"
+
+        stroke-linecap="round"
+
+      />
+
+ 
+
+      <!-- LINIA ŚRODKOWA -->
+
+      <path
+
+        d="M100 500
+
+           C 300 450, 200 300, 400 280
+
+           S 600 200, 700 300
+
+           S 850 420, 900 100"
+
+        fill="none"
+
+        stroke="white"
+
+        stroke-width="6"
+
+        stroke-dasharray="12 12"
+
+      />
+
+ 
+
+      <!-- START -->
+
+      <g class="banner">
+
+        <rect x="40" y="470" rx="8" ry="8" width="120" height="40"/>
+
+        <text x="100" y="497">START</text>
+
+      </g>
+
+ 
+
+      <!-- META -->
+
+      <g class="banner">
+
+        <rect x="840" y="60" rx="8" ry="8" width="120" height="40"/>
+
+        <text x="900" y="87">META</text>
+
+      </g>
+
+ 
+
+      <!-- KROKI -->
+
+      <g class="map-point" data-step="1" transform="translate(200 450)">
+
+        <circle r="20"/>
+
+        <text y="6">1</text>
+
+      </g>
+
+ 
+
+      <g class="map-point" data-step="2" transform="translate(350 320)">
+
+        <circle r="20"/>
+
+        <text y="6">2</text>
+
+      </g>
+
+ 
+
+      <g class="map-point" data-step="3" transform="translate(520 250)">
+
+        <circle r="20"/>
+
+        <text y="6">3</text>
+
+      </g>
+
+ 
+
+      <g class="map-point" data-step="4" transform="translate(680 320)">
+
+        <circle r="20"/>
+
+        <text y="6">4</text>
+
+      </g>
+
+ 
+
+      <g class="map-point" data-step="5" transform="translate(820 180)">
+
+        <circle r="20"/>
+
+        <text y="6">5</text>
+
+      </g>
+
+ 
+
+    </svg>
+
+ 
+
+    <!-- POPUPY -->
+
+    <div class="popup" id="popup-1">
+
+      <h3>Krok 1 – Start</h3>
+
+      <p>Początek drogi zawodowej i określenie kierunku.</p>
+
+    </div>
+
+ 
+
+    <div class="popup" id="popup-2">
+
+      <h3>Krok 2 – Nauka</h3>
+
+      <p>Rozwijanie kompetencji i zdobywanie wiedzy.</p>
+
+    </div>
+
+ 
+
+    <div class="popup" id="popup-3">
+
+      <h3>Krok 3 – Doświadczenie</h3>
+
+      <p>Praktyka i pierwsze realne wyzwania.</p>
+
+    </div>
+
+ 
+
+    <div class="popup" id="popup-4">
+
+      <h3>Krok 4 – Specjalizacja</h3>
+
+      <p>Budowanie eksperckiej pozycji.</p>
+
+    </div>
+
+ 
+
+    <div class="popup" id="popup-5">
+
+      <h3>Krok 5 – Meta</h3>
+
+      <p>Osiągnięcie celu zawodowego.</p>
+
+    </div>
+
+ 
+
+  </div>
+
+</section>
+
+ 
+
+<script>
+
+const points = document.querySelectorAll('.map-point');
+
+const popups = document.querySelectorAll('.popup');
+
+ 
+
+points.forEach(point => {
+
+  point.addEventListener('click', e => {
+
+    e.stopPropagation();
+
+ 
+
+    const step = point.dataset.step;
+
+    const popup = document.getElementById(`popup-${step}`);
+
+ 
+
+    popups.forEach(p => p.style.display = 'none');
+
+ 
+
+    const svgRect = document
+
+      .querySelector('.career-map-svg')
+
+      .getBoundingClientRect();
+
+ 
+
+    const pointRect = point.getBoundingClientRect();
+
+ 
+
+    popup.style.left =
+
+      pointRect.left - svgRect.left + 30 + 'px';
+
+    popup.style.top =
+
+      pointRect.top - svgRect.top - 20 + 'px';
+
+ 
+
+    popup.style.display = 'block';
+
+  });
+
+});
+
+ 
+
+document.addEventListener('click', () => {
+
+  popups.forEach(p => p.style.display = 'none');
+
+});
+
+</script>
+
+ 
+
+</body>
+
+</html>

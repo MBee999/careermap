@@ -1,0 +1,173 @@
+<style>
+
+:root {
+
+  --pink: rgb(226,0,122);
+
+  --gray: rgb(112,113,115);
+
+  --black: rgb(0,0,0);
+
+  --white: rgb(255,255,255);
+
+ 
+
+  --blue: rgb(39,46,116);
+
+  --green1: rgb(139,182,58);
+
+  --green2: rgb(182,201,47);
+
+  --yellow1: rgb(238,193,9);
+
+  --yellow2: rgb(245,211,0);
+
+}
+
+ 
+
+body {
+
+  margin: 0;
+
+  font-family: Arial, sans-serif;
+
+  background: #eee;
+
+}
+
+ 
+
+#career-map {
+
+  padding: 60px 20px;
+
+  background: linear-gradient(180deg, #ffffff, #f2f2f2);
+
+}
+
+ 
+
+.map-wrapper {
+
+  position: relative;
+
+  max-width: 1000px;
+
+  margin: 0 auto;
+
+}
+
+ 
+
+.career-map-svg {
+
+  width: 100%;
+
+  height: auto;
+
+}
+
+ 
+
+/* Bannery START / META */
+
+.banner rect {
+
+  fill: var(--pink);
+
+}
+
+ 
+
+.banner text {
+
+  fill: var(--white);
+
+  font-weight: bold;
+
+  text-anchor: middle;
+
+  font-size: 16px;
+
+}
+
+ 
+
+/* Punkty */
+
+.map-point {
+
+  cursor: pointer;
+
+  transition: transform 0.2s ease;
+
+}
+
+ 
+
+.map-point circle {
+
+  fill: var(--blue);
+
+}
+
+ 
+
+.map-point text {
+
+  fill: var(--white);
+
+  font-weight: bold;
+
+  text-anchor: middle;
+
+  font-size: 14px;
+
+}
+
+ 
+
+.map-point:hover {
+
+  transform: scale(1.15);
+
+}
+
+ 
+
+/* Popup */
+
+.popup {
+
+  position: absolute;
+
+  max-width: 260px;
+
+  background: var(--white);
+
+  border: 2px solid var(--pink);
+
+  border-radius: 12px;
+
+  padding: 16px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+
+  display: none;
+
+  z-index: 10;
+
+}
+
+ 
+
+.popup h3 {
+
+  margin-top: 0;
+
+  color: var(--pink);
+
+}
+
+</style>
